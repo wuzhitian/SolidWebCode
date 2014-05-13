@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	/*********************************/
+	//Page 144
+	/*********************************/
+	var GLOBAL = {};
+	GLOBAL.namespace = function(str){
+		var arr = str.split("."), o = GLOBAL;
+		for(var i = (arr[0] == "GLOBAL")? 1:0; i < arr.length; i++){
+			console.log(arr[i]);
+			o[arr[i]] = o[arr[i]] || {};	//当“自己”还不存在的时候，将“自己”赋值为新的命名空间;例如GLOBAL.namespace("A.CAT");	GLOBAL.namespace("A.DOG"); 当第一次调用后，GLOBAL.A = {};已经存在，第二次调用时，GLOBAL.A 等于自己本身
+			o = o[arr[i]];
+		}
+	};
+	(function(){
+		var a = 123, b = "Hello world";
+		GLOBAL.namespace("A.CAT");
+		GLOBAL.namespace("A.DOG");
+		GLOBAL.A.CAT.name = "mini";
+		GLOBAL.A.DOG.name = "wangcai";
+		GLOBAL.A.CAT.move = function(){
+
+		};
+		GLOBAL.A.DOG.move = function(){
+
+		};
+		GLOBAL.A.str2 = a;
+		GLOBAL.A.str = b;
+		console.log(GLOBAL.A);
+	})();
+	(function(){
+		var a = GLOBAL.A.str2, b = GLOBAL.A.str;
+		var d = "adang is very shame!";
+		d = b + ", " + d + a;
+		console.log(d);
+	})();
+	(function(){
+		var test = GLOBAL.A.str;
+		alert(test);
+	})();
+	</script>
+</body>
+</html>
