@@ -5,45 +5,170 @@
 	<title>Document</title>
 </head>
 <body>
+	<!-- P144 ***************************************************************-->
 	<script type="text/javascript">
 	/*********************************/
 	//Page 144
+	//GLOBAL.namespace(str);
 	/*********************************/
-	var GLOBAL = {};
-	GLOBAL.namespace = function(str){
-		var arr = str.split("."), o = GLOBAL;
-		for(var i = (arr[0] == "GLOBAL")? 1:0; i < arr.length; i++){
-			console.log(arr[i]);
-			o[arr[i]] = o[arr[i]] || {};	//当“自己”还不存在的时候，将“自己”赋值为新的命名空间;例如GLOBAL.namespace("A.CAT");	GLOBAL.namespace("A.DOG"); 当第一次调用后，GLOBAL.A = {};已经存在，第二次调用时，GLOBAL.A 等于自己本身
-			o = o[arr[i]];
-		}
-	};
-	(function(){
-		var a = 123, b = "Hello world";
-		GLOBAL.namespace("A.CAT");
-		GLOBAL.namespace("A.DOG");
-		GLOBAL.A.CAT.name = "mini";
-		GLOBAL.A.DOG.name = "wangcai";
-		GLOBAL.A.CAT.move = function(){
+	// var GLOBAL = {};
+	// GLOBAL.namespace = function(str){
+	// 	var arr = str.split("."), o = GLOBAL;
+	// 	for(var i = (arr[0] == "GLOBAL")? 1:0; i < arr.length; i++){
+	// 		console.log(arr[i]);
+	// 		o[arr[i]] = o[arr[i]] || {};	//当“自己”还不存在的时候，将“自己”赋值为新的命名空间;例如GLOBAL.namespace("A.CAT");	GLOBAL.namespace("A.DOG"); 当第一次调用后，GLOBAL.A = {};已经存在，第二次调用时，GLOBAL.A 等于自己本身
+	// 		o = o[arr[i]];
+	// 	}
+	// };
+	// (function(){
+	// 	var a = 123, b = "Hello world";
+	// 	GLOBAL.namespace("A.CAT");
+	// 	GLOBAL.namespace("A.DOG");
+	// 	GLOBAL.A.CAT.name = "mini";
+	// 	GLOBAL.A.DOG.name = "wangcai";
+	// 	GLOBAL.A.CAT.move = function(){
 
-		};
-		GLOBAL.A.DOG.move = function(){
+	// 	};
+	// 	GLOBAL.A.DOG.move = function(){
 
-		};
-		GLOBAL.A.str2 = a;
-		GLOBAL.A.str = b;
-		console.log(GLOBAL.A);
-	})();
-	(function(){
-		var a = GLOBAL.A.str2, b = GLOBAL.A.str;
-		var d = "adang is very shame!";
-		d = b + ", " + d + a;
-		console.log(d);
-	})();
-	(function(){
-		var test = GLOBAL.A.str;
-		alert(test);
-	})();
+	// 	};
+	// 	GLOBAL.A.str2 = a;
+	// 	GLOBAL.A.str = b;
+	// 	console.log(GLOBAL.A);
+	// })();
+	// (function(){
+	// 	var a = GLOBAL.A.str2, b = GLOBAL.A.str;
+	// 	var d = "adang is very shame!";
+	// 	d = b + ", " + d + a;
+	// 	console.log(d);
+	// })();
+	// (function(){
+	// 	var test = GLOBAL.A.str;
+	// 	alert(test);
+	// })();
 	</script>
+	<!-- P144 ***************************************************************-->
+	
+
+	<!-- P166 ***************************************************************-->
+	<!-- <ul>
+		<li id="item1"></li>
+		<li id="item2"></li>
+		<li id="item3"></li>
+	</ul> -->
+	<script type="text/javascript">
+	/*********************************/
+	//P166
+	//getNextNode(node);
+	/*********************************/
+	// function getNextNode(node){
+	// 	node = typeof node == "string" ? document.getElementById(node) : node;
+	// 	var nextNode = node.nextSibling;
+	// 	if(!nextNode) return null;
+	// 	if(!document.all){
+	// 		while(true){
+	// 			if(nextNode.nodeType == 1){
+	// 				break;
+	// 			}else{
+	// 				if(nextNode.nextSibling){
+	// 					nextNode = nextNode.nextSibling;
+	// 				}else{
+	// 					break;
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// 	return nextNode;
+	// };
+	// 
+	// var nextNode = getNextNode("item1");
+	// alert(nextNode.id);
+	</script>
+	<!-- P166 ***************************************************************-->
+
+
+	<!-- P168 ***************************************************************-->
+	<script type="text/javascript">
+	/*********************************/
+	//P168
+	//setOpacity(node,value);
+	/*********************************/
+	// function setOpacity(node,value){
+	// 	node = typeof node == "string" ? document.getElementById(node) : node;
+	// 	if(document.all){
+	// 		node.style.filter = 'alpha(opacity = ' + value + ')';
+	// 	}else{
+	// 		node.style.opacity = value/100;
+	// 	}
+	// }
+	//
+	// setOpacity("item1",80);
+	</script>
+	<!-- P168 ***************************************************************-->
+
+
+	<!-- P169 ***************************************************************-->
+	<!-- <span id="span">Hello world</span> -->
+	<script type="text/javascript">
+	/*********************************/
+	//P169
+	//getEventTarget(e)
+	/*********************************/
+	// function getEventTarget(e){
+	// 	e = window.event || e;
+	// 	return e.srcElement || e.target;
+	// };
+	// 
+	// document.getElementById("span").onclick = function(e){
+	// 	var eventTarget = getEventTarget(e);
+	// 	alert(eventTarget.innerHTML);
+	// };
+	</script>
+	<!-- P169 ***************************************************************-->
+
+
+	<!-- P172 ***************************************************************-->
+	<script type="text/javascript">
+	/*********************************/
+	//P172
+	//stopPropagation()
+	/*********************************/
+	// function stopPropagation(e){
+	// 	e = window.event || e;
+	// 	if(document.all){
+	// 		e.cancelBubble = true;
+	// 	}else{
+	// 		e.stopPropagation();
+	// 	}
+	// }
+	//
+	// document.getElementById("btn").onclick = function(e){
+	// 	stopPropagation(e);
+	// }
+	</script>
+	<!-- P172 ***************************************************************-->
+
+
+	<!-- P172 ***************************************************************-->
+	<script type="text/javascript">
+	/*********************************/
+	//P175
+	//on(node, eventType, handler)
+	/*********************************/
+	// function on(node, eventType, handler){
+	// 	node = typeof node == "string" ? document.getElementById(node) : node;
+	// 	if(document.all){
+	// 		node.attachEvent("on"+eventType, handler);
+	// 	}else{
+	// 		node.addEventListener(eventType, handler, false);
+	// 		//关于第三个参数 	http://www.cftea.com/c/2008/10/MQ0U26KP565GNM5Q.asp
+	// 	}
+	// }
+	// on(btn,"click",function(){
+
+	// });
+	</script>
+	<!-- P172 ***************************************************************-->
+
 </body>
 </html>
