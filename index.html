@@ -11,77 +11,77 @@
 	//Page 144
 	//GLOBAL.namespace(str);
 	/*********************************/
-	// var GLOBAL = {};
-	// GLOBAL.namespace = function(str){
-	// 	var arr = str.split("."), o = GLOBAL;
-	// 	for(var i = (arr[0] == "GLOBAL")? 1:0; i < arr.length; i++){
-	// 		console.log(arr[i]);
-	// 		o[arr[i]] = o[arr[i]] || {};	//当“自己”还不存在的时候，将“自己”赋值为新的命名空间;例如GLOBAL.namespace("A.CAT");	GLOBAL.namespace("A.DOG"); 当第一次调用后，GLOBAL.A = {};已经存在，第二次调用时，GLOBAL.A 等于自己本身
-	// 		o = o[arr[i]];
-	// 	}
-	// };
-	// (function(){
-	// 	var a = 123, b = "Hello world";
-	// 	GLOBAL.namespace("A.CAT");
-	// 	GLOBAL.namespace("A.DOG");
-	// 	GLOBAL.A.CAT.name = "mini";
-	// 	GLOBAL.A.DOG.name = "wangcai";
-	// 	GLOBAL.A.CAT.move = function(){
+	var GLOBAL = {};
+	GLOBAL.namespace = function(str){
+		var arr = str.split("."), o = GLOBAL;
+		for(var i = (arr[0] == "GLOBAL")? 1:0; i < arr.length; i++){
+			console.log(arr[i]);
+			o[arr[i]] = o[arr[i]] || {};	//当“自己”还不存在的时候，将“自己”赋值为新的命名空间;例如GLOBAL.namespace("A.CAT");	GLOBAL.namespace("A.DOG"); 当第一次调用后，GLOBAL.A = {};已经存在，第二次调用时，GLOBAL.A 等于自己本身
+			o = o[arr[i]];
+		}
+	};
+	(function(){
+		var a = 123, b = "Hello world";
+		GLOBAL.namespace("A.CAT");
+		GLOBAL.namespace("A.DOG");
+		GLOBAL.A.CAT.name = "mini";
+		GLOBAL.A.DOG.name = "wangcai";
+		GLOBAL.A.CAT.move = function(){
 
-	// 	};
-	// 	GLOBAL.A.DOG.move = function(){
+		};
+		GLOBAL.A.DOG.move = function(){
 
-	// 	};
-	// 	GLOBAL.A.str2 = a;
-	// 	GLOBAL.A.str = b;
-	// 	console.log(GLOBAL.A);
-	// })();
-	// (function(){
-	// 	var a = GLOBAL.A.str2, b = GLOBAL.A.str;
-	// 	var d = "adang is very shame!";
-	// 	d = b + ", " + d + a;
-	// 	console.log(d);
-	// })();
-	// (function(){
-	// 	var test = GLOBAL.A.str;
-	// 	alert(test);
-	// })();
+		};
+		GLOBAL.A.str2 = a;
+		GLOBAL.A.str = b;
+		console.log(GLOBAL.A);
+	})();
+	(function(){
+		var a = GLOBAL.A.str2, b = GLOBAL.A.str;
+		var d = "adang is very shame!";
+		d = b + ", " + d + a;
+		console.log(d);
+	})();
+	(function(){
+		var test = GLOBAL.A.str;
+		// alert(test);
+	})();
 	</script>
 	<!-- P144 ***************************************************************-->
 	
 
 	<!-- P166 ***************************************************************-->
-	<!-- <ul>
+	<ul>
 		<li id="item1"></li>
 		<li id="item2"></li>
 		<li id="item3"></li>
-	</ul> -->
+	</ul>
 	<script type="text/javascript">
 	/*********************************/
 	//P166
 	//getNextNode(node);
 	/*********************************/
-	// function getNextNode(node){
-	// 	node = typeof node == "string" ? document.getElementById(node) : node;
-	// 	var nextNode = node.nextSibling;
-	// 	if(!nextNode) return null;
-	// 	if(!document.all){
-	// 		while(true){
-	// 			if(nextNode.nodeType == 1){
-	// 				break;
-	// 			}else{
-	// 				if(nextNode.nextSibling){
-	// 					nextNode = nextNode.nextSibling;
-	// 				}else{
-	// 					break;
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// 	return nextNode;
-	// };
-	// 
-	// var nextNode = getNextNode("item1");
+	function getNextNode(node){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		var nextNode = node.nextSibling;
+		if(!nextNode) return null;
+		if(!document.all){
+			while(true){
+				if(nextNode.nodeType == 1){
+					break;
+				}else{
+					if(nextNode.nextSibling){
+						nextNode = nextNode.nextSibling;
+					}else{
+						break;
+					}
+				}
+			}
+		}
+		return nextNode;
+	};
+	
+	var nextNode = getNextNode("item1");
 	// alert(nextNode.id);
 	</script>
 	<!-- P166 ***************************************************************-->
@@ -93,16 +93,16 @@
 	//P168
 	//setOpacity(node,value);
 	/*********************************/
-	// function setOpacity(node,value){
-	// 	node = typeof node == "string" ? document.getElementById(node) : node;
-	// 	if(document.all){
-	// 		node.style.filter = 'alpha(opacity = ' + value + ')';
-	// 	}else{
-	// 		node.style.opacity = value/100;
-	// 	}
-	// }
-	//
-	// setOpacity("item1",80);
+	function setOpacity(node,value){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		if(document.all){
+			node.style.filter = 'alpha(opacity = ' + value + ')';
+		}else{
+			node.style.opacity = value/100;
+		}
+	}
+	
+	setOpacity("item1",80);
 	</script>
 	<!-- P168 ***************************************************************-->
 
@@ -114,15 +114,15 @@
 	//P169
 	//getEventTarget(e)
 	/*********************************/
-	// function getEventTarget(e){
-	// 	e = window.event || e;
-	// 	return e.srcElement || e.target;
-	// };
-	// 
-	// document.getElementById("span").onclick = function(e){
-	// 	var eventTarget = getEventTarget(e);
-	// 	alert(eventTarget.innerHTML);
-	// };
+	function getEventTarget(e){
+		e = window.event || e;
+		return e.srcElement || e.target;
+	};
+	
+	document.getElementById("span").onclick = function(e){
+		var eventTarget = getEventTarget(e);
+		alert(eventTarget.innerHTML);
+	};
 	</script>
 	<!-- P169 ***************************************************************-->
 
@@ -133,42 +133,267 @@
 	//P172
 	//stopPropagation()
 	/*********************************/
-	// function stopPropagation(e){
-	// 	e = window.event || e;
-	// 	if(document.all){
-	// 		e.cancelBubble = true;
-	// 	}else{
-	// 		e.stopPropagation();
-	// 	}
-	// }
-	//
-	// document.getElementById("btn").onclick = function(e){
-	// 	stopPropagation(e);
-	// }
+	function stopPropagation(e){
+		e = window.event || e;
+		if(document.all){
+			e.cancelBubble = true;
+		}else{
+			e.stopPropagation();
+		}
+	}
+	
+	document.getElementById("btn").onclick = function(e){
+		stopPropagation(e);
+	}
 	</script>
 	<!-- P172 ***************************************************************-->
 
 
-	<!-- P172 ***************************************************************-->
+	<!-- P175 ***************************************************************-->
 	<script type="text/javascript">
 	/*********************************/
 	//P175
 	//on(node, eventType, handler)
 	/*********************************/
-	// function on(node, eventType, handler){
-	// 	node = typeof node == "string" ? document.getElementById(node) : node;
-	// 	if(document.all){
-	// 		node.attachEvent("on"+eventType, handler);
-	// 	}else{
-	// 		node.addEventListener(eventType, handler, false);
-	// 		//关于第三个参数 	http://www.cftea.com/c/2008/10/MQ0U26KP565GNM5Q.asp
-	// 	}
-	// }
-	// on(btn,"click",function(){
+	function on(node, eventType, handler){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		if(document.all){
+			node.attachEvent("on"+eventType, handler);
+		}else{
+			node.addEventListener(eventType, handler, false);
+			//关于第三个参数 	http://www.cftea.com/c/2008/10/MQ0U26KP565GNM5Q.asp
+		}
+	}
+	on(btn,"click",function(){
 
-	// });
+	});
 	</script>
-	<!-- P172 ***************************************************************-->
+	<!-- P175 ***************************************************************-->
 
+
+	<!-- P176 ***************************************************************-->
+	<script type="text/javascript">
+	/*********************************/
+	//P176
+	//trim(ostr), isNumber(s), isString(s), isBoolean(s), isFunction(s), isNull(s), isUndefined(s), isEmpty(s), isArray(s);
+	/*********************************/
+	function isNumber(s){
+		return !isNaN(s);
+	};
+	function isString(s){
+		return typeof s === "string";
+	};
+	function isBoolean(s){
+		return typeof s === "boolean";
+	};
+	function isFunction(s){
+		return typeof s === "function";
+	};
+	function isNull(s){
+		return typeof s === null;
+	};
+	function isUndefined(s){
+		return typeof s === "undefined";
+	};
+	function isEmpty(s){
+		return /^\s*$/.test(s);
+	};
+	function isArray(s){
+		return s instanceof Array;
+	};
+	</script>
+	<!-- P176 ***************************************************************-->
+
+
+	<!-- P177 ***************************************************************-->
+	<script type="text/javascript">
+	/*********************************/
+	//P177
+	//get(node), $(node), getElementsByClassName(str, root, tag);
+	/*********************************/
+	function get(node){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		return node;
+	};
+	function $(node){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		return node;
+	};
+	function getElementsByClassName(str, root, tag){
+		if(root){
+			root = typeof root == "string" ? document.getElementById(root) : root;
+		}else{
+			root = document.body;
+		}
+		tag = tag || "*";
+		var els = root.getElementsByTagName(tag), arr = [];
+		for(var i = 0; i < els.length; i++){
+			for(var j = 0; j < els[i].className.split(" ").length; j++){
+				if(els[i].className.split(" ")[j] == str){
+					arr.push(els[i]);
+					break;	//阻止没必要的遍历
+				}
+			}
+		}
+		return arr;
+	}
+	</script>
+	<!-- P177 ***************************************************************-->
+
+
+	<!-- P178 ***************************************************************-->
+	<script type="text/javascript">
+	/*********************************/
+	//P178
+	//extend(subClass, superClass);
+	/*********************************/
+	function extend(subClass, superClass){
+		var F = function(){};
+		F.prototype = superClass.prototype;
+		subClass.prototype = new F();
+		subClass.prototype.constructor = subClass;
+		subClass.superclass = superClass.prototype;
+		if(superClass.prototype.constructor == Object.prototype.constructor){
+			superClass.prototype.constructor = superClass;
+		}
+	}
+
+	function Animal(name){
+		this.name = name;
+		this.type = "animal";
+	};
+	Animal.prototype = {
+		say: function(){
+			alert("I'm a(an) " + this.type + ", my name is " + this.name);
+		}
+	};
+	function Bird(name){
+		this.constructor.superclass.constructor.apply(this.arguments);
+		this.type = "bird";
+	}
+	extend(Bird, Animal);
+	Bird.prototype.fly = function(){
+		alert("I'm flying");
+	}
+	var canary  = new Bird("xiaocui");
+	console.log(canary);
+	canary.say();
+	canary.fly();
+	</script>
+	<!-- P178 ***************************************************************-->
+
+
+	<!-- P179 ***************************************************************-->
+	<script type="text/javascript">
+	/*********************************/
+	//P179
+	//使用命名空间
+	/*********************************/
+	var GLOBAL = {};
+	GLOBAL.namespace = function (str){
+		var arr = arr.split("."); o = GLOBAL;
+		for(var i = arr[0] == "GLOBAL" ? 1 : 0; i < arr.length; i++){
+			o[arr[i]] = o[arr[i]] || {};
+			o = o[arr[i]]; 
+		}
+	};
+
+	//Dom相关
+	GLOBAL.namespace("Dom");
+	GLOBAL.Dom.getNextNode = function(node){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		var nextNode = node.nextSibling;
+		if(!nextNode){
+			return;
+		};
+		if(!document.all){
+			while(true){
+				if(nextNode.nodeType == 1){
+					break;
+				}else{
+					if(nextNode.nextSibling){
+						nextNode = nextNode.nextSibling;
+					}else{
+						break;
+					}
+				}
+			}
+		};
+		return nextNode;
+	};
+	GLOBAL.Dom.setOpacity = function(node, value){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		if(document.all){
+			node.style.filter = "alpha(opacity:" + value + ")";
+		}else{
+			node.style.opacity = value / 100;
+		}
+	};
+	GLOBAL.Dom.get = function(node){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		return node;
+	};
+	GLOBAL.Dom.getElementsByClassName = function(className, parentNode, tag){
+		if(parentNode){
+			parentNode = typeof parentNode == "string" ? document.getElementById(parentNode) : parentNode;
+		}else{
+			parentNode = document.body;
+		};
+		tag = tag || "*";
+		var eles = parentNode.getElementsByTagName(tag), aResult = [];
+		for(var i = 0; i < eles.length; i++){
+			for(var j = 0; j < eles[i].className.split(" ").length; j++){
+				if(eles[i].className.split(" ")[j] == className){
+					aResult.push(eles[i]);
+					break;
+				}
+			}
+		}
+		return aResult;
+	};
+	//Event 相关
+	GLOBAL.namespace("Event");
+	GLOBAL.Event.getEventTarget = function(e){
+		e = window.event || e;
+		return e.srcElement || e.target;
+	};
+	GLOBAL.Event.stopPropagation = function(e){
+		e = window.event || e;
+		if(document.all){
+			e.cancelBubble = true;
+		}else{
+			e.stopPropagation();
+		}
+	};
+	GLOBAL.Event.on = function(node, eventType, handler){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		if(document.all){
+			node.attachevent("on" + eventType, handler);
+		}else{
+			node.addEventlistener(eventType, handler, false);
+		}
+	};
+	//Lang 相关
+	GLOBAL.namespace("Lang");
+	GLOBAL.Lang.trim = function(str){
+		return str.replace(/^\s+|\s+$/g,"");
+	};
+	GLOBAL.Lang.isNumber = function (a){
+		return !isNaN(a);
+	};
+	GLOBAL.Lang.extend = function(subClass, superClass){
+		var F = function() {};
+		F.prototype = superClass.prototype;
+		subClass.prototype = new F();
+		subClass.prototype.constructor = subClass;
+		subClass.superClass = superClass.prototype;
+		if(superClass.prototype.constructor == Object.prototype.constructor){
+			superClass.prototype.constructor = superClass;
+		}
+	}
+	</script>
+	<!-- P179 ***************************************************************-->
+
+	/*********************************/
 </body>
 </html>
