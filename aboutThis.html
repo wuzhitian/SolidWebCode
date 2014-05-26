@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>aboutThis</title>
+</head>
+<body>
+	<input type="button" value="click me" id="btn" name="BUTTON">
+	<script type="text/javascript">
+	var name = "somebody",
+		btn = document.getElementById("btn"),
+		zhitian = {
+			name : "zhitian",
+			say : function(){
+				alert(this.name);
+			}
+		};
+		zhitian.say();
+		zhitian.say.call(btn);
+		btn.onclick = function(){
+			zhitian.say.apply(btn);
+		};
+
+	// var name = "somebody";
+	// var adang = {
+	// 	name : "adang",
+	// 	say  : function(){
+	// 		alert("I'm " + this.name);
+	// 	},
+	// 	init : function(){
+	// 		var This = this;
+	// 		document.getElementById("btn").onclick = function(){
+	// 			This.say();
+	// 		}
+	// 	}
+	// };
+	// adang.init();
+	
+	</script>
+</body>
+</html>

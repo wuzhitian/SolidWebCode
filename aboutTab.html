@@ -139,28 +139,47 @@
 	GLOBAL.DOM.removeClass = function(node, str){
 		node.className = node.className.replace(new RegExp("(^|\\s+)" + str),"");
 	};
-	function setTab(root){
+	GLOBAL.namespace("Event");
+	GLOBAL.Event.on = function(node, eventType, handler, scope){
+		node = typeof node == "string" ? document.getElementById(node) : node;
+		scope = scope || node;
+		if(document.all){
+			node.attachEvent("on" + eventType, function(){
+				handler.apply(scope, arguments);
+			});
+		}else{
+			node.addEventListener(eventType, function(){
+				handler.apply(scope, arguments);
+			},false);
+		}
+	}
+	function setTab(root, trigger, callBack){
 		var tabMenus = GLOBAL.DOM.getElementsByClassName("J_tab-menu", root),
 			tabContents = GLOBAL.DOM.getElementsByClassName("J_tab-content", root);
+			//default eventType click;
+			trigger = trigger || "click";
 		for(var i = 0; i < tabMenus.length; i++){
 			tabMenus[i]._index = i;
-			tabMenus[i].onclick = function(){
+			GLOBAL.Event.on(tabMenus[i], trigger, function(){
 				for(var j = 0; j < tabContents.length; j++){
 					tabContents[j].style.display = "none";
-				}
+				};
 				tabContents[this._index].style.display = "block";
 				var currentMenu = GLOBAL.DOM.getElementsByClassName("tab-current-Menu",root)[0];
 				if(currentMenu){
 					GLOBAL.DOM.removeClass(currentMenu, "tab-current-Menu");
 				}
 				GLOBAL.DOM.addClass(this, "tab-current-Menu"); //将原有的类名清空了，上面.tab-menu绑定的点击事件依然有 效
-
-			}
+				if(callBack){
+					callBack(this._index);
+				}
+			});
+			// tabMenus[i].onclick = 
 		}
 	};
 	var tabs = GLOBAL.DOM.getElementsByClassName("J_tab");
 	for(var i = 0; i < tabs.length; i++){
-		setTab(tabs[i]);
+		setTab(tabs[i],"mouseover");
 	}
 	</script>
 </body>

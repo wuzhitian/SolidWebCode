@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	var phonebook = [
+		{name: "adang", tel: "1111"},
+		{name: "zhangsan", tel: "2222"},
+		{name: "lisi", tel: "333"},
+		{name: "wangliu", tel: "444"}
+	];
+	var phonebook2 = [
+		{name: "nihao", tel: "212"},
+		{name: "lihad", tel: "21222"}
+	];
+	function getTel(phonebook, oName){
+		for(var i = 0; i < phonebook.length; i++){
+			if(phonebook[i].name == oName){
+				return phonebook[i].tel;
+			}
+		}
+		return "have no record";
+	};
+	function addItems(phonebook, oName, sTel){
+		phonebook.push({name: oName, tel: sTel});
+	};
+	function removeItem(phonebook, oName){
+		for(var i = 0; i < phonebook.length; i++){
+			if(phonebook[i].name == oName){
+				phonebook.splice(i,1);
+				break;
+			}
+		}
+	};
+	</script>
+</body>
+</html>
