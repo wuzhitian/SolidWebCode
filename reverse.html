@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	function Animal(name){
+		var name = name;
+		var type = "animal";
+		var _age = 20;
+		var master = "adang";
+		this.getName = function(){
+			return name;
+		};
+		this.setName = function(o){
+			if(o != "wangcai" && o != "xiaoqiang"){
+				alert("你设置的name值不合要求");
+				return;
+			}
+			name = o;
+			this._valueChangeHandler("name");
+		};
+		this.getMaster = function(){
+			return master;
+		};
+		this.setMaster = function(o){
+			master = o;
+			this._valueChangeHandler("master");
+		};
+		this.getType = function(){
+			return type;
+		};
+		this.setType = function(o){
+			type = o;
+			this._valueChangeHandler("type");
+		};
+		this._getAge = function(){
+			return _age;
+		};
+		this._setAge = function(o){
+			_age = o;
+		};
+	};
+	Animal.prototype = {
+		_move : function(){
+			alert("I'm moving now!");
+		},
+		say : function(){
+			alert("I'm a" + this.getType() + ", my name is " + this.getName() + ", I'm " + this._getAge());
+		},
+		act : function(){
+			this._move();
+		},
+		onChange : function(valueName, fun){
+			this["_"+valueName+"ChangeHandlers"] = this["_"+valueName+"ChangeHandlers"] || [];
+			this["_"+valueName+"ChangeHandlers"].push(fun);
+		},
+		_valueChangeHandler : function(valueName){
+			var o = this.["_"+valueName+"ChangeHandlers"];
+			for(var i = 0; i < o.length; i++){
+				var methodName = "get" + valueName.charAt(0).toUpperCase() + valueName.slice(1); 
+				o[i](this[methodName]());
+			};
+		}
+	};
+	var myDog = new Animal("wangcai");
+	myDog.onChange("name", function(o){
+		if(o == "xiaoqiang"){
+			alert(1);
+		}else{
+			alert(2);
+		}
+	});
+	</script>
+</body>
+</html>
