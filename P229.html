@@ -293,7 +293,7 @@
 
 
 	/********************************/
-	//P236 extend
+	//P236 5-126 添加fly行为
 	/********************************/
 	// function Animal(name){
 	// 	this.name = name;
@@ -329,7 +329,7 @@
 	// myDog.fly();	//I'm flying
 
 
-	// //关于传值与传址
+	// 5-128 关于传值与传址
 	// var a = [1,2,3], b = {name:"adang", sex: "male", age: 30};
 	// var c = [], d = {};
 	// for(var p in a){
@@ -345,7 +345,7 @@
 	// alert(b.mail);
 	// alert(d.mail);
 
-	// //数组传值的简单方法
+	// 5-129 数组传值的简单方法
 	// var e = [1, 2, 3];
 	// var f = e.slice(), g = e.concat();
 	// f.pop();
@@ -355,8 +355,74 @@
 	// alert(g);
 
 
-	//改进原型继承
-	//
+	//P243 5-130 改进原型继承
+	//defined Animal Class
+	// function Animal(name){
+	// 	this.name = name;
+	// 	this.type = "animal";
+	// };
+	// Animal.prototype = {
+	// 	say : function(){
+	// 		alert("I'm a "+ this.type + " my name is "+ this.name);
+	// 	}
+	// };
+	// //defined Bird Class
+	// function Bird(name){
+	// 	Animal.call(this,name);
+	// };
+	// Bird.prototype = new Animal();
+	// Bird.prototype.constructor = Bird;
+	// Bird.prototype.fly = function(){
+	// 	alert("I'm flying!");
+	// };
+	// //Instantiation  实例化
+	// var myBird = new Bird("xiaocui");
+	// myBird.say();
+	// myBird.fly();
+	// var myDog = new Animal("wangcai");
+	// myDog.fly();
+
+
+	//P244 5-131
+	//defined extend function
+	// function extend(subClass, superClass){
+	// 	var F = function(){};
+	// 	F.prototype = superClass.prototype;
+	// 	subClass.prototype = new F();
+	// 	subClass.prototype.constructor = subClass;
+	// 	subClass.superClass = superClass.prototype; // for superClass.apply(this, arguments);
+	// 	if(superClass.prototype.constructor == Object.prototype.constructor){
+	// 		superClass.prototype.constructor = superClass;
+	// 	}
+	// }
+
+	// function Animal(name){
+	// 	this.name = name;
+	// 	this.type = "animal";
+	// };
+	// Animal.prototype = {
+	// 	say : function(){
+	// 		alert("I'm a "+ this.type + ", my name is "+ this.name);
+	// 	}
+	// };
+	// function Bird(name){
+	// 	this.constructor.superClass.constructor.apply(this,arguments);
+	// 	//why not "this.superClass.constructor.apply(this,arguments);"
+	// 	//because "this" is point to the Instantiation Object;
+	// 	//"this.contructor" is point to Constructed Function;
+	// 	this.type = "bird";
+	// }
+	// extend(Bird, Animal);
+	// Bird.prototype.fly = function(){
+	// 	alert("I'm flying");
+	// };
+	// var canary = new Bird("xiaocui");
+	// canary.say();
+	// canary.fly();
+	// var wangcai = new Animal("wangcai");
+	// wangcai.say();
+	// wangcai.fly();
+
 
 	/********************************/
 	</script>
