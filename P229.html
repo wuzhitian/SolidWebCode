@@ -424,6 +424,230 @@
 	// wangcai.fly();
 
 
+	//P247 5-134 面向对象方式重写电话本程序
+	//定义电话本管理类
+	// function PhonebookManager(o){
+	// 	this._phonebook = o;
+	// };
+	// PhonebookManager.prototype = {
+	// 	//查询记录
+	// 	getTel : function(oName){
+	// 		var tel = "";
+	// 		for(var i = 0; i < this._phonebook.length; i++){
+	// 			if(this._phonebook[i].name == oName){
+	// 				tel = this._phonebook[i].tel;
+	// 				break;
+	// 			}
+	// 		};
+	// 		if(tel != ""){
+	// 			return tel;
+	// 		}else{
+	// 			var str = oName + "'s tel is not defined";
+	// 			return str;
+	// 		}
+	// 	},
+	// 	//添加记录
+	// 	addItem : function(oName, oTel){
+	// 		this._phonebook.push({name: oName, tel: oTel});
+	// 	},
+	// 	removeItem : function(oName){
+	// 		var n;
+	// 		for(var i = 0; i< this._phonebook.length; i++){
+	// 			if(this._phonebook[i].name == oName){
+	// 				n = i;
+	// 				break;
+	// 			}
+	// 		};
+	// 		if(n != undefined){
+	// 			this._phonebook.splice(n,1);
+	// 		};
+	// 	}
+	// };
+
+	// //实例化
+	// var myPhonebook1 = [
+	// 	{name: "adang", tel: "1234567"},
+	// 	{name: "wangcai", tel: "123134567"},
+	// 	{name: "xiaoxui", tel: "790427"},
+	// 	{name: "fetch", tel: "758203029"},
+	// 	{name: "lili", tel: "5734901"}
+	// ];
+	// var myPhonebook2 = [
+	// 	{name: "jdong", tel: "54901321432"},
+	// 	{name: "shuangxi", tel: "fdsawedsa"},
+	// 	{name: "gudu", tel: "54901324325232432"},
+	// 	{name: "lenove", tel: "5490432"},
+	// 	{name: "G480", tel: "fdsajpe239"}
+	// ]
+	// var myPhonebookManager1 = new PhonebookManager(myPhonebook1),
+	// 	myPhonebookManager2 = new PhonebookManager(myPhonebook2);
+
+	// var adangTel = myPhonebookManager1.getTel("adang");
+	// alert(adangTel);
+
+	// myPhonebookManager1.addItem("lwei","56738278");
+	// alert(myPhonebookManager1.getTel("lwei"));
+
+
+	// alert(myPhonebookManager2.getTel("jdong"));
+	// myPhonebookManager2.removeItem("jdong");
+	// alert(myPhonebookManager2.getTel("jdong"));
+
+
+	//P249 5-136 用面向对象方式重构Tab
+	// var GLOBAL = {};
+	// GLOBAL.namespace = function(str){
+	// 	var arr = str.split("."), o = GLOBAL;
+	// 	for(var i = arr[0] == "GLOBAL" ? 1 : 0; i < arr.length; i++){
+	// 		o[arr[i]] = o[arr[i]] || {};
+	// 		o = o[arr[i]];
+	// 	}
+	// };
+	// GLOBAL.namespace("DOM");
+	// GLOBAL.DOM.getElementsByClassName = function(str, root, tag){
+	// 	if(root){
+	// 		root = typeof root == "string" ? document.getElementById(root) : root;
+	// 	}else{
+	// 		root = document.body;
+	// 	};
+	// 	tag = tag || "*";
+	// 	var els = root.getElementsByTagName(tag); arr = [];
+	// 	for(var i = 0; i < els.length; i++){
+	// 		for(var j = 0; k = els[i].className.split(" "); j < k.length; j++){
+	// 			if(k[j] == str){
+	// 				arr.push(els[i]);
+	// 				break;
+	// 			};
+	// 		}
+	// 	}
+	// 	return arr;
+	// };
+	// GLOBAL.DOM.addClass = function(node, str){
+	// 	if(!new RegExp("(^|\\s+)"+str).test(node.className){
+	// 		node.className = node.className + " " + str;
+	// 	};
+	// };
+	// GLOBAL.DOM.removeClass = function(node, str){
+	// 	node.className = node.className.replace(new RegExp("(^|\\s+)"+str),"");
+	// };
+	// GLOBAL.namespace("Event");
+	// GLOBAL.Event.on = function(node, eventType, handler, scope){
+	// 	node = typeof node == "string" ? document.getElementById(node) : node;
+	// 	scope = scope || node;	//scope参数，用于设置handler中的this指正指向，默认指向node节点
+	// 	if(document.all){
+	// 		node.attachEvent("on"+eventType, function(){
+	// 			handler.apply(scope, arguments);
+	// 		});
+	// 	}else{
+	// 		node.addEventListener(eventType, function(){
+	// 			handler.apply(scope, arguments)
+	// 		}, false);
+	// 	};
+	// };
+	// function Tab (config){
+	// 	this._root = config.root;
+	// 	this._currentClass = config.currentClass;
+	// 	var trigger = config.trigger || "click";
+	// 	this._handler = config.handler;
+	// 	var autoPlay = config.autoPlay;
+	// 	var playTime = config.playTime || 3000;
+	// 	this._tabMenus = GLOBAL.DOM.getElementsByClassName("J_tab-menu", this._root);
+	// 	this._tabContents = GLOBAL.DOM.getElementsByClassName("J_tab-content", this._root);
+	// 	this.currentIndex = 0;
+	// 	var This = this;
+	// 	if(autoPlay){
+	// 		setInterval(function(){
+	// 			This._autoHandler();	//*************
+	// 		},playTime);
+	// 	};
+	// 	for(var i = 0; i < this._tabMenus.length; i++){
+	// 		this._tabMenus[i]._index = i;
+	// 		GLOBAL.Event.on(this._tabMenus[i], trigger, function(){
+	// 			This.showItem(this._index);
+	// 			this.currentIndex = this._index;
+	// 		});
+	// 	};
+	// }
+	// Tab.prototype = {
+	// 	showItem : function(n){
+	// 		for(var i = 0; i < this._tabContents.length; i++){
+	// 			this._tabContents[i].style.display = "none";
+	// 		};
+	// 		this._tabContents[n].style.display = "block";
+	// 		if(this._currentClass){
+	// 			var currentMenu = GLOBAL.DOM.getElementsByClassName(this._currentClass, this._root)[0];
+	// 			if(currentMenu){
+	// 				GLOBAL.DOM.removeClass(currentMenu, this._currentClass);
+	// 			};
+	// 			GLOBAL.DOM.addClass(this._tabMenus[n], this._currentClass);
+	// 		};
+	// 		if(this._handler){
+	// 			this._handler(n);
+	// 		};
+	// 	},
+	// 	_autoHandler : function(){
+	// 		this.currentIndex++;
+	// 		if(this.currentIndex >= this._tabMenus.length){
+	// 			this.currentIndex = 0;
+	// 		};
+	// 		this.showItem(this.currentIndex);
+	// 	}
+	// };
+	// var tabs = GLOBAL.DOM.getElementsByClassName("J_tab");
+	// new Tab({
+	// 	root : tabs[0], trigger : "mouseover"
+	// });
+	// new Tab({
+	// 	root : tabs[1], currentClass : "tabcurrentMenu", autoPlay : true, playTime : 5000
+	// });
+	// new Tab({
+	// 	root : tabs[2], currentClass : "tabcurrentMenu2", trigger : "mouseover", hanler : function(index){
+	// 		alert("您激活的是第"+(index+1)+"个标签");
+	// 	}
+	// });
+	//
+	//P251 5-137   调用内置类
+	// var a = new String("hello world");
+	// var b = "hello world";
+	// alert(a.length);	//11
+	// alert(b.length);	//1
+	// var c = new Array(1,2,3);
+	// var d = [1,2,3];
+	// c.push(4);
+	// d.pop();
+	// alert(c);	//[1,2,3,4]
+	// alert(d);	//[1,2]
+
+	//P252 5-138	扩展内置类的行为
+	Array.prototype.each = function(fun){
+		for(var i = 0; i < this.length; i++){
+			fun(this[i],i);
+		}
+	};
+	Array.prototype.clone = function(){
+		var o = [];
+		this.each(function(v,k){
+			o[k] = v;
+		});
+		return o;
+	};
+	Array.prototype.map = function(fun){
+		var o = [];
+		this.each(function(v,k){
+			o[k] = fun(v,k);
+		});
+		return o;
+	};
+	Array.prototype.Delete = function(a){
+		var o = this.clone();
+		for(var i = o.length; i > 0; i-- ){
+			if(o[i] == a){
+				o.splice(i,1);
+			}
+		}
+		return o;
+	};
+	
 	/********************************/
 	</script>
 </head>
